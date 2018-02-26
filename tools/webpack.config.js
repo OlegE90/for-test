@@ -7,14 +7,14 @@ const extractLess = new ExtractTextPlugin('bundle.css');
 let mainConfig = {
     target: 'web',
     context: path.resolve('src'),
-    entry: './main.jsx',
+    entry: './main.tsx',
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
     } ,
     devtool: 'eval',
     resolve: {
-        extensions: ['.js', '.jsx'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
         // Allow absolute paths in imports, e.g. import Button from 'components/Button'
         modules: ['node_modules', 'src'],
     },
@@ -22,7 +22,7 @@ let mainConfig = {
         rules: [
             // Rules for JS
             {
-                test: /\.(jsx|js?)$/,
+                test: /\.(jsx|js|tsx?)$/,
                 rules: [
                     {
                         loader: 'babel-loader',
@@ -35,9 +35,14 @@ let mainConfig = {
                                 'react'
                             ]
                         }
+                    },
+                    {
+                        test: /\.tsx?$/,
+                        exclude: /node_modules/,
+                        loader: 'ts-loader'
                     }
                 ]
-            },
+            }
         ]
     },
     plugins: [
