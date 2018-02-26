@@ -1,12 +1,7 @@
-const path = require('path');
-const webpack = require('webpack');
+import path from 'path';
+import HtmlWebpackPlugin  from 'html-webpack-plugin';
 
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-console.log(process.env.NODE_ENV);
-
-const mainConfig = {
+let mainConfig = {
     target: 'web',
     context: path.resolve('src'),
     entry: './main.tsx',
@@ -14,7 +9,7 @@ const mainConfig = {
         path: path.resolve('dist'),
         filename: 'bundle.js'
     } ,
-    devtool: env.prod ? 'source-map' : 'eval',
+    devtool: 'eval',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
         // Allow absolute paths in imports, e.g. import Button from 'components/Button'
@@ -53,12 +48,29 @@ const mainConfig = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('[name].css')
+        new HtmlWebpackPlugin({
+            template: path.resolve('src/assets/index.html'),
+            filename: 'index.html',
+            inject: 'body'
+        })
     ]
 };
 
-config = {
+export const productionConfig = {
     ...mainConfig,
 };
 
-module.exports = config;
+export const developConfig = {
+    ...mainConfig,
+};
+
+export const serverConfig = {
+    port: '8080',
+    host: 'localhost',
+    options: {
+        stats: {
+            colors: true
+        },
+        hot: true
+    }
+};

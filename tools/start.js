@@ -1,7 +1,8 @@
-// tools/bundle.js
 import webpack from 'webpack';
-import webpackConfig from './webpack.config.js'; // <-- Contains ES6+
+import WebpackDevServer from 'webpack-dev-server';
 
-const bundler = webpack(webpackConfig);
+import {developConfig, serverConfig} from './webpack.config.js';
 
-bundler.run();
+const {port, host, options} = serverConfig;
+
+new WebpackDevServer(webpack(developConfig), options).listen(port, host);
