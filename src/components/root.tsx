@@ -12,7 +12,7 @@ export class Root extends React.Component<IProps, {}> {
         const {name} = this.props;
 
         return (
-            <div>
+            <div className="main-style">
                 <h1>Hello {name}</h1>
                 <form>
                     <input type="text"/> <br/>

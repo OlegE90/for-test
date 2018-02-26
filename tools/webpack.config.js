@@ -1,5 +1,8 @@
 import path from 'path';
 import HtmlWebpackPlugin  from 'html-webpack-plugin';
+import ExtractTextPlugin  from 'extract-text-webpack-plugin';
+
+const extractLess = new ExtractTextPlugin('bundle.css');
 
 let mainConfig = {
     target: 'web',
@@ -58,10 +61,44 @@ let mainConfig = {
 
 export const productionConfig = {
     ...mainConfig,
+    module: {
+        ...mainConfig.module,
+        rules: [
+            ...mainConfig.module.rules,
+            {
+                test: /\.less$/,
+                use: extractLess.extract({
+                    use: [{
+                        loader: "css-loader"
+                    }, {
+                        loader: "less-loader"
+                    }],
+                    fallback: "style-loader"
+                })
+            }
+        ]
+    },
+    plugins: [
+        ...mainConfig.plugins,
+        extractLess
+    ]
 };
 
 export const developConfig = {
     ...mainConfig,
+    module: {
+        ...mainConfig.module,
+        rules: [
+            ...mainConfig.module.rules,
+            {
+                test: /\.less$/,
+                use:  ["style-loader", "css-loader", "less-loader"],
+            }
+        ]
+    },
+    plugins: [
+        ...mainConfig.plugins
+    ]
 };
 
 export const serverConfig = {

@@ -33,7 +33,8 @@
   },
   "scripts": {
     "prebuild": "rimraf dist",
-    "start": "babel-node --presets es2015,stage-2 tools/start.js"
+    "build": "babel-node --presets es2015,stage-2 tools/build",
+    "start": "babel-node --presets es2015,stage-2 tools/start"
   },
   "author": "OlegE",
   "license": "ISC"
