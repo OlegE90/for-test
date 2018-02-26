@@ -7,14 +7,14 @@ const extractLess = new ExtractTextPlugin('bundle.css');
 let mainConfig = {
     target: 'web',
     context: path.resolve('src'),
-    entry: './main.tsx',
+    entry: './main.jsx',
     output: {
         path: path.resolve('dist'),
         filename: 'bundle.js'
     } ,
     devtool: 'eval',
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        extensions: ['.js', '.jsx'],
         // Allow absolute paths in imports, e.g. import Button from 'components/Button'
         modules: ['node_modules', 'src'],
     },
@@ -22,7 +22,7 @@ let mainConfig = {
         rules: [
             // Rules for JS
             {
-                test: /\.(jsx|js|tsx?)$/,
+                test: /\.(jsx|js?)$/,
                 rules: [
                     {
                         loader: 'babel-loader',
@@ -35,19 +35,9 @@ let mainConfig = {
                                 'react'
                             ]
                         }
-                    },
-                    {
-                        test: /\.tsx?$/,
-                        exclude: /node_modules/,
-                        loader: 'ts-loader'
                     }
                 ]
             },
-            // Rules for Style Sheets
-            {
-                test: /\.less$/,
-                use:  ["style-loader", "css-loader", "less-loader"],
-            }
         ]
     },
     plugins: [
@@ -65,6 +55,7 @@ export const productionConfig = {
         ...mainConfig.module,
         rules: [
             ...mainConfig.module.rules,
+            // Rules for Style Sheets
             {
                 test: /\.less$/,
                 use: extractLess.extract({
@@ -90,6 +81,7 @@ export const developConfig = {
         ...mainConfig.module,
         rules: [
             ...mainConfig.module.rules,
+            // Rules for Style Sheets
             {
                 test: /\.less$/,
                 use:  ["style-loader", "css-loader", "less-loader"],

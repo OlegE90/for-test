@@ -1,22 +1,21 @@
 {
-  "name": "test-work-space",
+  "name": "webpack-config",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/bundle.js",
   "dependencies": {
     "lodash": "^4.17.4",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
+  "keywords": [
+    "webpack"
+  ],
   "devDependencies": {
-    "@types/react": "^16.0.34",
-    "@types/react-dom": "^16.0.3",
-    "@types/webpack-env": "^1.13.3",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2016": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "cross-env": "^5.1.3",
@@ -26,8 +25,6 @@
     "less": "^3.0.1",
     "less-loader": "^4.0.5",
     "style-loader": "^0.19.1",
-    "ts-loader": "^3.2.0",
-    "typescript": "^2.6.2",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.11.0"
   },
