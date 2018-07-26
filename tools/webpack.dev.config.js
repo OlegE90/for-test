@@ -5,7 +5,12 @@ module.exports = {
   mode: "development",
   target: 'web',
   context: path.resolve('src'),
-  entry: './main.jsx',
+  entry: {
+    main: [
+      'core-js/fn/promise',
+      './main.jsx'
+    ]
+  },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name]-bundle.js',
