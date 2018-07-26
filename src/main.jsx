@@ -6,7 +6,7 @@ import * as ReactDOM from 'react-dom';
 import {Root} from 'components/root'
 
 ReactDOM.render(
-    <Root name="Taylor" />,
+    <Root name="3323332" />,
     document.getElementById('root')
 );
 

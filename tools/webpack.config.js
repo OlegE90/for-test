@@ -9,8 +9,10 @@ let mainConfig = {
     context: path.resolve('src'),
     entry: './main.jsx',
     output: {
-        path: path.resolve('dist'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname, '../dist'),
+        filename: 'bundle.js',
+        // Path in index.html /main.js
+        publicPath: "/"
     } ,
     devtool: 'eval',
     resolve: {
@@ -20,9 +22,8 @@ let mainConfig = {
     },
     module: {
         rules: [
-            // Rules for JS
             {
-                test: /\.(jsx|js?)$/,
+                test: /\.(jsx?)$/,
                 rules: [
                     {
                         loader: 'babel-loader',
@@ -51,6 +52,7 @@ let mainConfig = {
 
 export const productionConfig = {
     ...mainConfig,
+    mode: "production",
     module: {
         ...mainConfig.module,
         rules: [
@@ -77,6 +79,10 @@ export const productionConfig = {
 
 export const developConfig = {
     ...mainConfig,
+    entry: [
+      './main.jsx'
+    ],
+    mode: "development",
     module: {
         ...mainConfig.module,
         rules: [
@@ -94,12 +100,13 @@ export const developConfig = {
 };
 
 export const serverConfig = {
-    port: '8080',
-    host: 'localhost',
-    options: {
-        stats: {
-            colors: true
-        },
-        hot: true
-    }
+  port: '8080',
+  host: 'localhost',
+  options: {
+    overlay: true,
+    stats: {
+      colors: true
+    },
+    hot: true
+  }
 };
