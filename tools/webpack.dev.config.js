@@ -8,11 +8,10 @@ module.exports = {
   entry: './main.jsx',
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'bundle.js',
+    filename: '[name]-bundle.js',
     // Path in index.html /main.js
     publicPath: "/"
   } ,
-  devtool: 'eval',
   resolve: {
     extensions: ['.js', '.jsx'],
     // Allow absolute paths in imports, e.g. import Button from 'components/Button'
@@ -40,14 +39,42 @@ module.exports = {
       {
         test: /\.less$/,
         use:  ["style-loader", "css-loader", "less-loader"],
+      },
+      {
+        test: /\.html/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].html"
+            }
+          },
+          {
+            loader: "extract-loader"
+          },
+          {
+            loader: "html-loader",
+            options: {
+              attrs: ['img:src']
+            }
+          }
+        ],
+      },
+      {
+        test: /\.png/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[name]-[hash:8].[ext]"
+            }
+          }
+        ],
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: path.resolve('src/assets/index.html'),
-      filename: 'index.html',
-      inject: 'body'
-    })
-  ]
+  devServer: {
+    contentBase: 'dist',
+    overlay: true,
+  }
 };
