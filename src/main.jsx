@@ -20,5 +20,6 @@
 //     });
 // }
 //
+require('webpack-hot-middleware/client');
 require('assets/styles/main.less');
 require('assets/index.html');
