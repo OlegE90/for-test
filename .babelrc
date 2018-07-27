@@ -1,12 +1,6 @@
 {
-  "plugins": ["transrform"],
   "presets": [
     "env",
-    {
-      "targets": {
-        "browsers": ["last 2 vesrions"]
-      },
-      "debug": true
-    }
+    "react"
   ]
 }

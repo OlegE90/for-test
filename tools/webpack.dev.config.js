@@ -23,6 +23,7 @@ module.exports = {
     // Allow absolute paths in imports, e.g. import Button from 'components/Button'
     modules: ['node_modules', 'src'],
   },
+  devtool: "source-map",
   module: {
     rules: [
       {
