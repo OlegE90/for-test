@@ -50,15 +50,6 @@ module.exports = {
         test: /\.html/,
         use: [
           {
-            loader: "file-loader",
-            options: {
-              name: "[name].html"
-            }
-          },
-          {
-            loader: "extract-loader"
-          },
-          {
             loader: "html-loader",
             options: {
               attrs: ['img:src']
@@ -88,6 +79,10 @@ module.exports = {
     }
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new HtmlWebpackPlugin({
+      template: './assets/index.html',
+      inject: false
+    })
   ]
 };
